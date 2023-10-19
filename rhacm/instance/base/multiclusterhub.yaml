@@ -1,0 +1,21 @@
+apiVersion: operator.open-cluster-management.io/v1
+kind: MultiClusterHub
+metadata:
+   namespace: open-cluster-management
+   name: multiclusterhub
+   annotations:
+      installer.open-cluster-management.io/mce-subscription-spec: '{"source": "my-redhat-v413-catalog"}'
+spec: 
+  tolerations:
+  - key: node-role.kubernetes.io/infra
+    effect: NoSchedule
+    operator: Exists
+  - key: node-role.kubernetes.io/infra
+    effect: NoExecute
+    operator: Exists
+  overrides:
+    components:
+    - name: console
+      enabled: true
+  availabilityConfig: "Basic"
+
