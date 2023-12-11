@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: nutanix-csi-operator-group
+  namespace: openshift-cluster-csi-drivers
+spec:
+  targetNamespaces:
+    - openshift-cluster-csi-drivers

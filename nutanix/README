@@ -1,0 +1,27 @@
+-------------------------------
+- Install the Nutanix Operator
+
+-- Move to the good folder
+cd /nutanix/operator
+
+-- Update the operator channel and catalog
+vim overlay/airgapped-lab/kustomization.yaml
+  - Update the channel and source "value"
+
+-- Install the Nutanix operator
+oc create -k overlay/airgapped-lab/
+
+- Monitor Nutanix Operator installation
+oc get all -n openshift-cluster-csi-drivers
+
+-------------------------------
+- Install the Nutanix instance
+
+-- Move to the good folder
+cd /nutanix/instance
+
+-- Install
+
+
+- Monitor Nutanix Operator installation
+oc get all -n openshift-cluster-csi-drivers
