@@ -4,7 +4,7 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
 
 # See below the details for each operator
 
-### Nutanix Operator
+### Nutanix Operator/Instance/Storage class
 - Update the air-gapped kustomize file
    - cd nutanix
    - operator/overlay/airgapped/kustomization.yaml
@@ -31,7 +31,7 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
 
   oc get all -n openshift-cluster-csi-drivers
 
-### RHACM operator
+### RHACM operator/Instance
 - ACM Operator on INFRA node
   - Update the air-gapped kustomize file
     - cd rhacm
