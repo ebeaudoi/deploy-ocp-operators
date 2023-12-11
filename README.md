@@ -1,20 +1,20 @@
 # deploy-ocp-operators
-##################################################################
-- Deploy the OCP Operator using Kustomize
-1) Update the air-gapped kustomize file
+### Deploy the OCP Operator using Kustomize
+- Update the air-gapped kustomize file
    - cd nutanix
    - operator/overlay/airgapped/kustomization.yaml
      Update the channel and RH catalog name 
    - storageclass/overlay/airgapped/kustomization.yaml
      Update the PRISM iscsi, storage name and the login information values
-2) Deploy
-  # Operator
+- Deploy
+  1. Operator
   oc create -k operator/overlay/airgapped/
-  # Instance
+  2. Instance
   oc create -k instance/base/
-  # Storage Class
+  3. Storage Class
   oc create -k storageclass/overlay/airgapped/
-3) Monitor Nutanix Operator installation
+
+- Monitor Nutanix Operator installation
 oc get all -n openshift-cluster-csi-drivers
 
 ##################################################################
