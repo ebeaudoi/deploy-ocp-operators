@@ -1,5 +1,10 @@
 # deploy-ocp-operators
-### Deploy the OCP Operator using Kustomize
+## Description
+Those kustomization has been created to deploy Openshift operators in air-gapped environment
+
+# See below the details for each operators
+
+### Deploy the Nutanix Operator
 - Update the air-gapped kustomize file
    - cd nutanix
    - operator/overlay/airgapped/kustomization.yaml
@@ -17,7 +22,7 @@
 - Monitor Nutanix Operator installation
 oc get all -n openshift-cluster-csi-drivers
 
-##################################################################
+### Deploy the RHACM operator
 - ACM Operator on INFRA node
 1) Update the air-gapped kustomize file
    - cd rhacm
