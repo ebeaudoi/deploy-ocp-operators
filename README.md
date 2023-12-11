@@ -1,26 +1,34 @@
 # deploy-ocp-operators
-## Description
-Those kustomization has been created to deploy Openshift operators in air-gapped environment
+- Description
+Those kustomization has been created to deploy Openshift operators in an air-gapped environment
 
-# See below the details for each operators
+# See below the details for each operator
 
-### Deploy the Nutanix Operator
+### Nutanix Operator
 - Update the air-gapped kustomize file
    - cd nutanix
    - operator/overlay/airgapped/kustomization.yaml
-     Update the channel and RH catalog name 
+
+      Update the channel and RH catalog name 
    - storageclass/overlay/airgapped/kustomization.yaml
+
      Update the PRISM iscsi, storage name and the login information values
+
 - Deploy
-  1. Operator
-  oc create -k operator/overlay/airgapped/
-  2. Instance
-  oc create -k instance/base/
-  3. Storage Class
-  oc create -k storageclass/overlay/airgapped/
+  - Operator
+  
+    oc create -k operator/overlay/airgapped/
+
+  -  Instance
+  
+    oc create -k instance/base/
+
+  - Storage Class
+  
+    oc create -k storageclass/overlay/airgapped/
 
 - Monitor Nutanix Operator installation
-oc get all -n openshift-cluster-csi-drivers
+  oc get all -n openshift-cluster-csi-drivers
 
 ### Deploy the RHACM operator
 - ACM Operator on INFRA node
