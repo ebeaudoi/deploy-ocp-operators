@@ -52,7 +52,8 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   - Instance
   
   oc create -k instance/overlay/airgapped/
-  - Storage Class  - NOT READY TO USE
+
+### Storage Class  - NOT READY TO USE
   
   oc create -k observability/overlay/airgapped/
 
