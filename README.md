@@ -53,14 +53,31 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   
   oc create -k instance/overlay/airgapped/
 
-### Storage Class  - NOT READY TO USE
-  
-  oc create -k observability/overlay/airgapped/
-
-- Monitor Nutanix Operator installation
+- Monitor RHACM Operator installation
 
   oc get pods -w -n open-cluster-management
 
+### Obesrvability  - NOT READY TO USE
+  
+  oc create -k observability/overlay/airgapped/
+
+### Devspaces operator/Instance
+- Devspaces Operator - all namespace
+  - Update the air-gapped kustomize file
+    - under devspaces
+      - Update the Operator/overlay/airgapped/kustomization.yaml
+        - Update the channel 
+        - Update the RH catalog name
+
+  - Deploy the devspace components
+    - Operator
+      - oc apply -k operator/overlay/airgapped/
+
+    - Instance
+      - oc apply -k instance/overlay/airgapped
+
+  - Monitor
+    - oc get pods -n openshift-devspaces -w
 
 
 
