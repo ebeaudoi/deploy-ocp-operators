@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: sso
+
+resources:
+  - ../../base
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'stable'
+      - op: replace
+        path: /spec/source
+        value: cs-my-redhat-catalog
+      - op: replace
+        path: /spec/config/env/0/value
+        value: 'quay.devu.ca:8443/redhat-v414/rhel8/postgresql-10:c0d790cd'
+    target:
+      kind: Subscription
+      name: rhsso-operator
