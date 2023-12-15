@@ -45,17 +45,17 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
 
       Update the ose-cli image value from the private Quay
 
-- Deploy
-  - Operator
+  - Deploy
+    - Operator
+    
+    oc create -k operator/overlay/airgapped/
+    - Instance
+    
+    oc create -k instance/overlay/airgapped/
   
-  oc create -k operator/overlay/airgapped/
-  - Instance
+  - Monitor RHACM Operator installation
   
-  oc create -k instance/overlay/airgapped/
-
-- Monitor RHACM Operator installation
-
-  oc get pods -w -n open-cluster-management
+    oc get pods -w -n open-cluster-management
 
 ### Obesrvability  - NOT READY TO USE
   
@@ -78,6 +78,25 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
 
   - Monitor
     - oc get pods -n openshift-devspaces -w
+
+### Single Sign-On operator/Instance
+- Single Sign-On Operator - sso namespace
+  - Update the air-gapped kustomize file
+    - under rhsso
+      - Update the Operator/overlay/airgapped/kustomization.yaml
+        - Update the channel 
+        - Update the RH catalog name
+        - Upadte the postgresql-10 (from private Quay)
+
+  - Deploy the devspace components
+    - Operator
+      - oc apply -k operator/overlay/airgapped/
+
+    - Instance
+      - oc apply -k instance/overlay/airgapped/
+
+  - Monitor
+    - oc get pods -n sso -w
 
 
 
