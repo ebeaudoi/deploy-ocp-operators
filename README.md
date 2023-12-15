@@ -8,11 +8,13 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
 - Update the air-gapped kustomize file
    - cd nutanix
    - operator/overlay/airgapped/kustomization.yaml
+      - Update the channel 
+      - RH catalog name 
 
-      Update the channel and RH catalog name 
    - storageclass/overlay/airgapped/kustomization.yaml
-
-     Update the PRISM iscsi, storage name and the login information values
+     - Update the PRISM iscsi 
+     - Storage name
+     - The login information values
 
 - Deploy
   - Operator
@@ -36,14 +38,14 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   - Update the air-gapped kustomize file
     - cd rhacm
     - operator/overlays/airgapped/kustomization.yaml
+      - Update the channel
+      - RH catalog name
 
-      Update the channel and RH catalog name
     - instance/overlay/airgapped/kustomization.yaml 
+      - Update the mce-subscription-spec value
 
-      Update the mce-subscription-spec value
     - observability/overlay/airgapped/kustomization.yaml
-
-      Update the ose-cli image value from the private Quay
+      - Update the ose-cli image value from the private Quay
 
   - Deploy
     - Operator
