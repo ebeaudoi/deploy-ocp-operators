@@ -1,0 +1,41 @@
+- Deploy the logging Operator (The console plugin will need to be enable manually)
+oc apply -k operator/overlays/airgapped/
+
+- Deploy loki
+oc apply -k loki/operator/overlay/airgapped/
+
+- create the loki Object storage
+oc create -f 01-create-logging-obc.yaml
+
+- create the loki obc password
+./02-create-loki-obc-secret.sh
+
+- Deploy loki instance
+oc apply -k loki/instance/overlay/airgapped/
+
+- Monitor
+oc get pods,pvc -n openshift-logging
+
+- Deploy loggin instance
+oc apply -k instance/overlays/airgapped/
+
+- Enable RedHat OpenShift Logging plugin using CLI
+oc patch consoles.operator.openshift.io cluster   --patch '{ "spec": { "plugins": ["logging-view-plugin"] }  }' --type=merge
+oc get consoles.operator.openshift.io cluster -o yaml |grep logging-view-plugin || oc patch consoles.operator.openshift.io cluster --type=merge --patch '{ "spec": { "plugins": ["logging-view-plugin"]}}'
+
+-- Console operator example
+~~~
+apiVersion: operator.openshift.io/v1
+kind: Console
+metadata:
+...
+...
+...
+spec:
+  logLevel: Normal
+  managementState: Managed
+  operatorLogLevel: Normal
+  plugins:
+  - logging-view-plugin
+  - monitoring-plugin
+~~~

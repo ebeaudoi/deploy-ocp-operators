@@ -1,5 +1,0 @@
-oc process -f 04-eventrouter-template.yaml | oc apply -n openshift-logging -f -
-
-for i in $(oc get pvc -o custom-columns=:.metadata.name|egrep -v ^$);do oc delete pvc $i;done
-
-for i in $(oc get job.batch -n openshift-marketplace -o custom-columns=NAME:.metadata.name|egrep -v NAME);do echo $i;oc get job.batch/$i -n openshift-marketplace -o yaml|grep image;done
