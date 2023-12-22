@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-        #- namespace.yaml
-- namespace-on-infra.yaml
+- namespace.yaml
+        #- namespace-on-infra.yaml
 - subscription.yaml
 - operatorgroup.yaml
 - clusteradmin-group.yaml
