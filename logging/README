@@ -39,3 +39,6 @@ spec:
   - logging-view-plugin
   - monitoring-plugin
 ~~~
+
+- Deploy event router
+oc process -f eventrouter-template.yaml | oc apply -n openshift-logging -f -
