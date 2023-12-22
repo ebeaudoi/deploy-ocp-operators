@@ -104,27 +104,27 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
     Move under logging folder 
 
   - Deploy the logging Operator (The console plugin will need to be enable manually)
-    oc apply -k operator/overlays/airgapped/
+    - oc apply -k operator/overlays/airgapped/
 
   - Deploy loki
-    oc apply -k loki/operator/overlay/airgapped/
+    - oc apply -k loki/operator/overlay/airgapped/
 
   - create the loki Object storage
-    oc create -f 01-create-logging-obc.yaml
+    - oc create -f 01-create-logging-obc.yaml
   
   - create the loki obc password
-    ./02-create-loki-obc-secret.sh
+    - ./02-create-loki-obc-secret.sh
   
   - Deploy loki instance
-    oc apply -k loki/instance/overlay/airgapped/
+    - oc apply -k loki/instance/overlay/airgapped/
   
   - Monitor
-    oc get pods,pvc -n openshift-logging
+    - oc get pods,pvc -n openshift-logging
   
   - Deploy loggin instance
-    oc apply -k instance/overlays/airgapped/
+    - oc apply -k instance/overlays/airgapped/
   
   - Enable RedHat OpenShift Logging plugin using CLI
-    oc get consoles.operator.openshift.io cluster -o yaml |grep logging-view-plugin || oc patch consoles.operator.openshift.io cluster --type=merge --patch '{ "spec": { "plugins": ["logging-view-plugin"]}}'
+    - oc get consoles.operator.openshift.io cluster -o yaml |grep logging-view-plugin || oc patch consoles.operator.openshift.io cluster --type=merge --patch '{ "spec": { "plugins": ["logging-view-plugin"]}}'
   
 
