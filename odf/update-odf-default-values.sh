@@ -10,7 +10,7 @@ CAPACITY="150Gi"
 
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
-cp noobaa/overlay/default/patch-storage-capacity.yaml{,.$(date +%Y%m%d-%HH%M)}
+cp noobaa/overlay/airgapped/patch-storage-capacity.yaml{,.$(date +%Y%m%d-%HH%M)}
 OSE_CLI=$( echo $OSE_CLI_IMAGE |sed 's/\//\\\//g')
 # Showing new values
 echo "-----------------------------"
