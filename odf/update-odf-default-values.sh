@@ -43,4 +43,4 @@ sed -i "/path:\ \/spec\/template\/spec\/containers\/0\/image/{ n; s/value: .*$/v
 # Update Stroage capacity          #
 echo "-- Update storage capacity --"
 echo "File: noobaa/overlay/default/patch-storage-capacity.yaml"
-sed -i "/path:\ \/spec\/pvPool\/resources\/requests\/storage/{ n; s/value: .*$/value: $CAPACITY/g }" noobaa/overlay/default/patch-storage-capacity.yaml
+sed -i "/path:\ \/spec\/pvPool\/resources\/requests\/storage/{ n; s/value: .*$/value: $CAPACITY/g }" noobaa/overlay/airgapped/patch-storage-capacity.yaml
