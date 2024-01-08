@@ -100,7 +100,7 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   - Monitor
     - oc get pods -n sso -w
 
-### Deploy logging/loki operators/instances
+### logging/loki operators/instances
     Move under logging folder 
 
   - Deploy the logging Operator (The console plugin will need to be enable manually)
