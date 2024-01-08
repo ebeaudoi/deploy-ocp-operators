@@ -127,4 +127,28 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   - Enable RedHat OpenShift Logging plugin using CLI
     - oc get consoles.operator.openshift.io cluster -o yaml |grep logging-view-plugin || oc patch consoles.operator.openshift.io cluster --type=merge --patch '{ "spec": { "plugins": ["logging-view-plugin"]}}'
   
+### ODF operator/Instance
+  Note: The "update-odf-default-values.sh" script can be used to update the default values
+  
+- ODF Operator on INFRA node
+  - Update the air-gapped kustomize file
+    - cd odf
+    - operator/overlays/airgapped/kustomization.yaml
+      - Update the channel
+      - RH catalog name
+      - ose_cli_image
 
+    - noobaa/overlay/airgapped/kustomization.yaml 
+      - Update the mce-subscription-spec value
+
+  - Deploy
+    - Operator
+    
+    oc create -k operator/overlay/airgapped/
+    - Instance
+    
+    oc create -k noobaa/overlay/airgapped/
+  
+  - Monitor ODF Operator installation
+  
+    oc get pods -w -n openshift-storage
