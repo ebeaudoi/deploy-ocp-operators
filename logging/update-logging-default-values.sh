@@ -40,11 +40,11 @@ sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" operator/o
   # Update the loki subscription channel
 echo
 echo "-- Update loki operator channel-- "
-echo "File: operator/overlay/airgapped/kustomization.yaml"
+echo "File: loki/operator/overlay/airgapped/kustomization.yaml"
 echo
 sed -i "/path:\ \/spec\/channel/{ n; s/value: .*$/value: $LOKI_CHANNEL/g }" loki/operator/overlay/airgapped/kustomization.yaml
   # Update the loki subscription catalog
 echo "-- Update loki operator catalog --"
-echo "File: operator/overlay/airgapped/kustomization.yaml"
+echo "File: loki/operator/overlay/airgapped/kustomization.yaml"
 echo ""
 sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" loki/operator/overlay/airgapped/kustomization.yaml
