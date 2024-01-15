@@ -27,7 +27,20 @@ oc get pods,pvc -n openshift-logging
 oc apply -k instance/overlay/airgapped/
 
 - Enable RedHat OpenShift Logging plugin using CLI
-oc patch consoles.operator.openshift.io cluster   --patch '{ "spec": { "plugins": ["logging-view-plugin"] }  }' --type=merge
+oc edit consoles.operator.openshift.io cluster
+~~~
+...
+spec:
+  logLevel: Normal
+  managementState: Managed
+  operatorLogLevel: Normal
+  plugins:
+  - logging-view-plugin
+...
+~~~
+OR
+>> The below patch the console, but might remove the other plugging
+oc get consoles.operator.openshift.io cluster -o yaml > console.yaml
 oc get consoles.operator.openshift.io cluster -o yaml |grep logging-view-plugin || oc patch consoles.operator.openshift.io cluster --type=merge --patch '{ "spec": { "plugins": ["logging-view-plugin"]}}'
 
 -- Console operator example
