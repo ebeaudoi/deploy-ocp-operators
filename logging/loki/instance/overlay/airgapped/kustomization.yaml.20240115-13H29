@@ -12,5 +12,5 @@ patches:
   patch: |-
     - op: replace
       path: /spec/storageClassName
-      value: storageclass
+      value: thin-csi
 

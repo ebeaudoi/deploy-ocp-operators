@@ -7,11 +7,13 @@
 LOG_CHANNEL="stable-5.8"
 LOKI_CHANNEL="stable-5.8"
 CATALOG="cs-my-redhat-catalog"
+STORAGECLASS="storageclass"
 
 ####################
 # Backup the files #
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 cp loki/operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
+cp loki/instance/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 
 ######################
 # Showing new values #
@@ -19,7 +21,7 @@ echo "-----------------------------"
 echo "Logging channel = $LOG_CHANNEL"
 echo "Loki channel = $LOKI_CHANNEL"
 echo "Catalog = $CATALOG"
-echo "OSE CLI = $OSE_CLI"
+echo "Storage Class = $STORAGECLASS="
 echo "-----------------------------"
 
 #############################################
@@ -35,6 +37,7 @@ echo "-- Update logging operator catalog --"
 echo "File: operator/overlay/airgapped/kustomization.yaml"
 echo ""
 sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" operator/overlay/airgapped/kustomization.yaml
+
 #############################################
 # Update loki operator overlay yaml file #
   # Update the loki subscription channel
@@ -48,3 +51,11 @@ echo "-- Update loki operator catalog --"
 echo "File: loki/operator/overlay/airgapped/kustomization.yaml"
 echo ""
 sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" loki/operator/overlay/airgapped/kustomization.yaml
+
+#############################################
+# Update loki operator overlay yaml file #
+echo
+echo "-- Update loki instance storage class-- "
+echo "File: loki/instance/overlay/airgapped/kustomization.yaml"
+echo
+sed -i "/path:\ \/spec\/storageClassName/{ n; s/value: .*$/value: $STORAGECLASS/g }" loki/instance/overlay/airgapped/kustomization.yaml
