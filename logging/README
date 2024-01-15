@@ -8,6 +8,8 @@ oc apply -k operator/overlay/airgapped/
 
 - Deploy loki
 oc apply -k loki/operator/overlay/airgapped/
+  - Monitor
+  oc get pods -w -n openshift-operators-redhat
 
 - create the loki Object storage
 oc create -f 01-create-logging-obc.yaml
