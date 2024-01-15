@@ -1,5 +1,10 @@
+1)
+- First update the overlay kustomization.yaml file manually or using the "update-logging-default-values.sh"
+  before to run the below command
+
+2)
 - Deploy the logging Operator (The console plugin will need to be enable manually)
-oc apply -k operator/overlays/airgapped/
+oc apply -k operator/overlay/airgapped/
 
 - Deploy loki
 oc apply -k loki/operator/overlay/airgapped/
@@ -17,7 +22,7 @@ oc apply -k loki/instance/overlay/airgapped/
 oc get pods,pvc -n openshift-logging
 
 - Deploy loggin instance
-oc apply -k instance/overlays/airgapped/
+oc apply -k instance/overlay/airgapped/
 
 - Enable RedHat OpenShift Logging plugin using CLI
 oc patch consoles.operator.openshift.io cluster   --patch '{ "spec": { "plugins": ["logging-view-plugin"] }  }' --type=merge
