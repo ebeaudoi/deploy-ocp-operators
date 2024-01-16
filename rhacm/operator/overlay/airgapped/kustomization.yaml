@@ -12,8 +12,8 @@ patches:
   patch: |-
     - op: replace
       path: /spec/channel
-      value: release-2.8
+      value: release-2.9
     - op: replace
       path: /spec/source
-      value: my-redhat-v413-catalog
+      value: cs-my-redhat-catalog
 

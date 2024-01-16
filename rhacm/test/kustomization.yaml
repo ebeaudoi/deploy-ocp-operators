@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+patches:
+
+- target:
+    kind: MultiClusterHub
+    name: multiclusterhub
+  patch: |-
+    apiVersion: operator.open-cluster-management.io/v1
+    kind: MultiClusterHub
+    metadata:
+       namespace: open-cluster-management
+       name: multiclusterhub
+       annotations:
+         installer.open-cluster-management.io/mce-subscription-spec: '{"source": "cs-my-redhat-catalog"}'
+         installer.open-cluster-management.io/mce-subscription-spec: '{"source": "ebdn-cs-my-redhat-catalog"}'

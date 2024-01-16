@@ -3,16 +3,16 @@
 ################################
 # IMPORTANT                    #
 # Update the 3 below variables #
-RHCAM_CHANNEL="release-2.8"
+RHCAM_CHANNEL="release-2.9"
 RHCAM_CATALOG="cs-my-redhat-catalog"
-RHACM_OSE_CLI="quay.devu.ca:8443/redhat-v414/openshift4/ose-cli:e11912cb"
+RHACM_OSE_CLI="ebdnquay.ebdnlab.vmware.tamlab.rdu2.redhat.com:8443/redhat-v414/openshift4/ose-cli:e11912cb"
 
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 cp observability/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 cp instance/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 OSE_CLI=$( echo $RHACM_OSE_CLI|sed 's/\//\\\//g')
-
+MCE_SUB_SPEC="\ \ \ \ \ \ \ \ \ installer\.open-cluster-management\.io\/mce-subscription-spec: \'\{\\\"source\\\": \\\"$RHCAM_CATALOG\\\"\}\'"
 # Showing new values
 echo "-----------------------------"
 echo "Channel = $RHCAM_CHANNEL"
@@ -48,4 +48,6 @@ sed -i "/path:\ \/spec\/template\/spec\/containers\/0\/image/{ n; s/value: .*$/v
 echo "-- Update instance --"
 echo "File: instance/overlay/airgapped/kustomization.yaml"
 echo ""
-sed -i "/path:\ \/metadata\/annotations\/installer\.open-cluster-management\.io\/mce-subscription-spec/{ n; s/value: .*$/value:\ \'\{\"source\": \"$RHCAM_CATALOG\"\}\'/g }" instance/overlay/airgapped/kustomization.yaml
+sed -i "/.*mce-subscription-spec.*/c $MCE_SUB_SPEC" instance/overlay/airgapped/kustomization.yaml
+
+
