@@ -12,7 +12,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/channel
-      value: ebdn-stable
+      value: stable
     - op: replace
       path: /spec/source
-      value: ebdn-cs-my-redhat-catalog
+      value: my-redhat-v413-catalog

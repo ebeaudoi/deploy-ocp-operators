@@ -12,16 +12,16 @@ patches:
   patch: |-
     - op: replace
       path: /spec/channel
-      value: stable
+      value: ebdn-stable
     - op: replace
       path: /spec/source
-      value: my-redhat-v413-catalog
+      value: ebdn-cs-my-redhat-catalog
 - target:
     kind: Job
     name: create-cluster-init-bundle
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
-      value: ebdnquay.ebdnlab.vmware.tamlab.rdu2.redhat.com:8443/redhat-v413/openshift4/ose-cli:e11912cb
+      value: ebdn-ebdnquay.ebdnlab.vmware.tamlab.rdu2.redhat.com:8443/redhat-v414/openshift4/ose-cli:e11912cb
 
 
