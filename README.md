@@ -59,9 +59,13 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   
     oc get pods -w -n open-cluster-management
 
-### Obesrvability  - NOT READY TO USE
+### Obesrvability 
+
+    - Observability
+    oc create -k observability/overlay/airgapped/
   
-  oc create -k observability/overlay/airgapped/
+    - Monitor
+    oc get pods -w -n open-cluster-management-observability
 
 ### Devspaces operator/Instance
 - Devspaces Operator - all namespace
