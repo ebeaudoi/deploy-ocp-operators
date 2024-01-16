@@ -13,6 +13,7 @@ parameters:
   csi.storage.k8s.io/controller-expand-secret-name: ntnx-secret
   csi.storage.k8s.io/controller-expand-secret-namespace: openshift-cluster-csi-drivers
   csi.storage.k8s.io/fstype: ext4
+  flashMode: ENABLED
   dataServiceEndPoint: 11.10.17.20:3260
   storageContainer: storage-name
   storageType: NutanixVolumes
