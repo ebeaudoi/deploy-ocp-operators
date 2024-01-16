@@ -133,3 +133,29 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   - Monitor ODF Operator installation
   
     oc get pods -w -n openshift-storage
+
+### RHACS operator/Instance
+- ACS Operator on INFRA node
+  - Update the air-gapped kustomize file
+    - cd rhacs
+    - operator/overlays/airgapped/kustomization.yaml
+      - Update the channel
+      - RH catalog name
+
+    - central-secure-instance/overlay/airgapped/kustomization.yaml
+      - Update the channel
+      - RH catalog name
+      - Update the ose-cli image value from the private Quay
+
+  - Deploy
+    - Operator
+
+    oc create -k operator/overlay/airgapped/
+    - Central and secured cluster
+
+    oc create -k central-secure-instance/overlay/airgapped/
+
+  - Monitor RHACS Operator installation
+
+    oc get pods -w -n rhacs-operator
+
