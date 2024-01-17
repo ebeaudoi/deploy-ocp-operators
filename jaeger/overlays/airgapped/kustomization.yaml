@@ -14,7 +14,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/channel
-      value: stable-5.8
+      value: stable
     - op: replace
       path: /spec/source
       value: cs-my-redhat-catalog
