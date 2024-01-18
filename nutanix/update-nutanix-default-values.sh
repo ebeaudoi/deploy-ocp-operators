@@ -3,7 +3,7 @@
 ################################
 # IMPORTANT                    #
 # Update the 3 below variables #
-NUTANIX_CHANNEL="release-2.8"
+NUTANIX_CHANNEL="stable"
 RH_CATALOG="my-redhat-v413-catalog"
 PRISM_ISCSI_IP="10.10.10.10"
 PRISM_STORAGE_NAME="os-storage"

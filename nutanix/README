@@ -1,27 +1,29 @@
--------------------------------
-- Install the Nutanix Operator
+### Nutanix Operator/Instance/Storage class
+- Update the air-gapped kustomize file
+   - cd nutanix
+   - operator/overlay/airgapped/kustomization.yaml
+      - Update the channel 
+      - RH catalog name 
 
--- Move to the good folder
-cd /nutanix/operator
+   - storageclass/overlay/airgapped/kustomization.yaml
+     - Update the PRISM iscsi 
+     - Storage name
+     - The login information values
 
--- Update the operator channel and catalog
-vim overlay/airgapped-lab/kustomization.yaml
-  - Update the channel and source "value"
+- Deploy
+  - Operator
+  
+    oc create -k operator/overlay/airgapped/
 
--- Install the Nutanix operator
-oc create -k overlay/airgapped-lab/
+  -  Instance
+  
+    oc create -k instance/base/
+
+  - Storage Class
+  
+    oc create -k storageclass/overlay/airgapped/
 
 - Monitor Nutanix Operator installation
-oc get all -n openshift-cluster-csi-drivers
 
--------------------------------
-- Install the Nutanix instance
+  oc get all -n openshift-cluster-csi-drivers
 
--- Move to the good folder
-cd /nutanix/instance
-
--- Install
-
-
-- Monitor Nutanix Operator installation
-oc get all -n openshift-cluster-csi-drivers

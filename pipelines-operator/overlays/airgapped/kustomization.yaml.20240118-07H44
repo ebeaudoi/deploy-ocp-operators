@@ -14,7 +14,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/channel
-      value: latest
+      value: ebdn-latest
     - op: replace
       path: /spec/source
-      value: cs-my-redhat-catalog
+      value: ebdn-cs-my-redhat-catalog
