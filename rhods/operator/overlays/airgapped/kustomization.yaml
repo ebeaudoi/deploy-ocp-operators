@@ -5,6 +5,7 @@ resources:
   - ../../base
 
 patches:
+# Change the Subscription details
 - target:
     kind: Subscription
     name: .*
@@ -15,3 +16,4 @@ patches:
     - op: replace
       path: /spec/source
       value: cs-my-redhat-catalog
+
