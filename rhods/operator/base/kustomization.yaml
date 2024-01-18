@@ -3,5 +3,7 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - namespace-ods-applications.yaml  
+  - namespace-ods-monitoring.yaml
   - operator-group.yaml
   - subscription.yaml
