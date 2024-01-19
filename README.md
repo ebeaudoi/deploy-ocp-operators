@@ -1,6 +1,9 @@
 # deploy-ocp-operators
 - Description
+
 Those kustomization has been created to deploy Openshift operators in an air-gapped environment
+
+In each opertor folder, you can find an update script use to update the kustomization.yaml files
 
 # See below the details for each operator
 
@@ -59,7 +62,7 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   
     oc get pods -w -n open-cluster-management
 
-### Obesrvability 
+### Obesrvability  (ACM)
 
     - Observability
     oc create -k observability/overlay/airgapped/
@@ -158,4 +161,27 @@ Those kustomization has been created to deploy Openshift operators in an air-gap
   - Monitor RHACS Operator installation
 
     oc get pods -w -n rhacs-operator
+
+### Elasticsearch operator
+- Update the air-gapped kustomize file
+  - Option 1 - Using update-elasticsearch-default-values.sh
+    - Edit the script and update those values:
+      CHANNEL="stable-5.8"
+      CATALOG="cs-my-redhat-catalog"
+    - Run the script
+      ./update-elasticsearch-default-values.sh
+
+  - Option 2 - Manually - Under elasticsearch folder
+
+    overlays/airgapped/kustomization.yaml
+      Update the channel 
+      Update the RH catalog name
+
+  - Deploy the operator components
+    - Operator
+      oc apply -k overlays/airgapped/
+
+    - Monitor
+      oc get all -n openshift-operators-redhat
+
 
