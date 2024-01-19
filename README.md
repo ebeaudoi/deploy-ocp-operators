@@ -171,17 +171,156 @@ In each opertor folder, you can find an update script use to update the kustomiz
     - Run the script
       ./update-elasticsearch-default-values.sh
 
-  - Option 2 - Manually - Under elasticsearch folder
+- Option 2 - Manually - Under elasticsearch folder
 
+  overlays/airgapped/kustomization.yaml
+    Update the channel 
+    Update the RH catalog name
+
+- Deploy the operator components
+  - Operator
+    oc apply -k overlays/airgapped/
+
+  - Monitor
+    oc get all -n openshift-operators-redhat
+
+### Jaeger operator
+- Update the air-gapped kustomize file
+  - Option 1 - Using update-jaeger-default-values.sh
+    Edit the script and update those values:
+    CHANNEL="stable"
+    CATALOG="cs-my-redhat-catalog"
+  - Run the script
+    ./update-jaeger-default-values.sh
+
+- Option 2 - Manually - Under jaeger folder
+  overlays/airgapped/kustomization.yaml
+    Update the channel 
+    Update the RH catalog name
+
+- Deploy the operator components
+  oc apply -k overlays/airgapped/
+
+- Monitor
+  oc get all -n openshift-distributed-tracing
+
+### Jaeger operator
+- Update the air-gapped kustomize file
+  - Option 1 - Using update-kiali-op-default-values.sh
+    - Edit the script and update those values:
+      CHANNEL="stable"
+      CATALOG="cs-my-redhat-catalog"
+    - Run the script
+      ./update-kiali-op-default-values.sh
+
+  - Option 2 - Manually - Under kiali folder
     overlays/airgapped/kustomization.yaml
-      Update the channel 
-      Update the RH catalog name
+    - Update the channel 
+    - Update the RH catalog name
+- Deploy the operator components
+  oc apply -k overlays/airgapped/
+- Monitor
+  oc get all -n openshift-operators
 
-  - Deploy the operator components
-    - Operator
-      oc apply -k overlays/airgapped/
+### ServiceMesh operator
+- Installing ServiceMesh operator
+  - Update the air-gapped kustomize file
+    - Option 1 - Using update-servicemesh-default-values.sh
+      - Edit the script and update those values:
+        CHANNEL="stable"
+        CATALOG="cs-my-redhat-catalog"
+        startingCSV=”servicemeshoperator.v2.4.5”
+      - Run the script
+        ./update-servicemesh-default-values.sh
 
-    - Monitor
-      oc get all -n openshift-operators-redhat
+    - Option 2 - Manually - Under servicemesh folder
+      operator/overlays/airgapped/kustomization.yaml
+      - Update the channel 
+      - Update the RH catalog name
+      - Update startingCSV
+- Deploy the operator components
+  oc apply -k operator/overlays/airgapped/
+- Monitor
+  oc get all -n openshift-operators
+
+### Serverless operator
+- Installing Serverless operator
+  - Update the air-gapped kustomize file
+    - Option 1 - Using update-serverless-default-values.sh
+      - Edit the script and update those values:
+        CHANNEL="stable"
+        CATALOG="cs-my-redhat-catalog"
+      - Run the script
+        ./update-serverless-default-values.sh
+
+    - Option 2 - Manually - Under serverless folder
+      operator/overlays/airgapped/kustomization.yaml
+      - Update the channel 
+      - Update the RH catalog name
+- Deploy the operator components
+  oc apply -k operator/overlays/airgapped/
+- Monitor
+  oc get all -n openshift-serverless
+
+### Pipeline operator
+- Installing Pipeline operator
+  - Update the air-gapped kustomize file
+    - Option 1 - Using update-pipeline-op-default-values.sh
+      - Edit the script and update those values:
+        CHANNEL="latest"
+        CATALOG="cs-my-redhat-catalog"
+      - Run the script
+        ./update-pipeline-op-default-values.sh
+
+    - Option 2 - Manually - Under pipeline folder
+      overlays/airgapped/kustomization.yaml
+      - Update the channel 
+      - Update the RH catalog name
+
+- Deploy the operator components
+  oc apply -k overlays/airgapped/
+
+- Monitor
+  oc get all -n openshift-operators
+
+### Openshift Data Science (rhods)
+- Installing Openshift Data Science (rhods)
+  - Prerequisite:
+    - Pipeline operator
+    - Serverless operator
+    - Servicemesh operator
+      - Elasticsearch operator
+      - Jaeger operator
+      - Kiali operator
+    - References:
+      - Servicemessh https://docs.openshift.com/container-platform/4.14/service_mesh/v1x/installing-ossm.html
+      - RHODS https://access.redhat.com/documentation/en-us/red_hat_openshift_ai_self-managed/2.5/html-single/installing_and_uninstalling_openshift_ai_self-managed_in_a_disconnected_environment/index
+
+  - Update the air-gapped kustomize file
+    - Option 1 - Using update-rhods-default-values.sh
+      - Edit the script and update those values:
+        CHANNEL="stable"
+        CATALOG="cs-my-redhat-catalog"
+      - Run the script
+        ./update-rhods-default-values.sh
+
+    - Option 2 - Manually - Under rhods folder
+      operator/overlays/airgapped/kustomization.yaml
+      - Update the channel 
+      - Update the RH catalog name
+- Deploy the operator components
+  oc apply -k operator/overlays/airgapped/
+
+- Note - The following projects will be created
+  redhat-ods-applications
+  redhat-ods-monitoring
+  Redhat-ods-operator
+- Deploy the instance components
+  oc apply -k instance/overlays/airgapped/
+- Monitor
+  - Operator
+    oc get pods -w -n redhat-ods-operator
+  - Instance
+    oc get pods -n redhat-ods-applications
 
 
