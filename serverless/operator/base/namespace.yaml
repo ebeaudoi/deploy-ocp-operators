@@ -3,6 +3,9 @@ kind: Namespace
 metadata:
   annotations:
     openshift.io/display-name: "Red Hat OpenShift Serverless"
+    openshift.io/node-selector: 'node-role.kubernetes.io/infra='
+    scheduler.alpha.kubernetes.io/defaultTolerations: >-
+      [{"operator": "Exists", "effect": "NoSchedule", "key": "node-role.kubernetes.io/infra"},{"operator": "Exists", "effect": "NoExecute", "key": "node-role.kubernetes.io/infra"}]
   labels:
     openshift.io/cluster-monitoring: 'true'
   name: openshift-serverless
