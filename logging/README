@@ -38,27 +38,3 @@ spec:
   - logging-view-plugin
 ...
 ~~~
-OR
->> The below patch the console, but might remove the other plugging
-oc get consoles.operator.openshift.io cluster -o yaml > console.yaml
-oc get consoles.operator.openshift.io cluster -o yaml |grep logging-view-plugin || oc patch consoles.operator.openshift.io cluster --type=merge --patch '{ "spec": { "plugins": ["logging-view-plugin"]}}'
-
--- Console operator example
-~~~
-apiVersion: operator.openshift.io/v1
-kind: Console
-metadata:
-...
-...
-...
-spec:
-  logLevel: Normal
-  managementState: Managed
-  operatorLogLevel: Normal
-  plugins:
-  - logging-view-plugin
-  - monitoring-plugin
-~~~
-
-- Deploy event router
-oc process -f eventrouter-template.yaml | oc apply -n openshift-logging -f -
