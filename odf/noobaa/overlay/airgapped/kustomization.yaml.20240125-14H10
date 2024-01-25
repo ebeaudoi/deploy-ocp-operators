@@ -8,18 +8,20 @@ resources:
   - ../../base
 
 patches:
+# Change the Subscription details
 - target:
     kind: BackingStore
     name: .*
   patch: |-
-    - op: replace
-      path: /spec/pvPool/resources/requests/storage
-      value: 300Gi
+  - op: replace
+    path: /spec/pvPool/resources/requests/storage
+    value: 300Gi
+
 - target:
     kind: StorageCluster
     name: .*
   patch: |-
-    - op: replace
-      path: /spec/multiCloudGateway/dbStorageClassName
-      value: nutanix-volume
-  
+  - op: replace
+    path: /spec/multiCloudGateway/dbStorageClassName
+    value: storagename
+

@@ -5,8 +5,8 @@
 # Update the 3 below variables #
 CHANNEL="stable-4.14"
 CATALOG="cs-my-redhat-catalog"
-OSE_CLI_IMAGE="quay.devu.ca:8443/redhat-v414/openshift4/ose-cli:e11912cb"
-CAPACITY="150Gi"
+OSE_CLI_IMAGE="quay.devu.ca:8443/redhat-v414-01/openshift4/ose-cli:64a6e075"
+CAPACITY="300Gi"
 DEFAULT_STORAGE="nutanix-volume"
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
@@ -46,7 +46,7 @@ sed -i "/path:\ \/spec\/template\/spec\/containers\/0\/image/{ n; s/value: .*$/v
   #Capacity
 echo "-- Update storage capacity --"
 echo "File: noobaa/overlay/airgapped/patch-storage-capacity.yaml"
-sed -i "/path:\ \/spec\/pvPool\/resources\/requests\/storage/{ n; s/value: .*$/value: $CAPACITY/g }" noobaa/overlay/airgapped/patch-storage-capacity.yaml
+sed -i "/path:\ \/spec\/pvPool\/resources\/requests\/storage/{ n; s/value: .*$/value: $CAPACITY/g }" noobaa/overlay/airgapped/kustomization.yaml
 
   #default storage
 echo "-- Update default storage name --"

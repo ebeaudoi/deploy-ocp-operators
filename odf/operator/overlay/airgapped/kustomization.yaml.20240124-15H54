@@ -12,7 +12,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
-      value: quay.devu.ca:8443/redhat-v414-01/openshift4/ose-cli:64a6e075
+      value: ebdnquay.ebdnlab.vmware.tamlab.rdu2.redhat.com:8443/redhat-v414/openshift4/ose-cli:64a6e075
 # Change the Subscription details
 - target:
     kind: Subscription
@@ -23,5 +23,5 @@ patches:
       value: stable-4.14
     - op: replace
       path: /spec/source
-      value: cs-my-redhat-catalog
+      value: cs-my-redhat-v414-catalog
 
