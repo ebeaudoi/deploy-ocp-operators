@@ -23,7 +23,7 @@ spec:
       nodeCount: 3
       redundancyPolicy: SingleRedundancy
     lokistack:
-      name: lokistack-sample
+      name: lokistack-instance
     retentionPolicy:
       application:
         maxAge: 7d
