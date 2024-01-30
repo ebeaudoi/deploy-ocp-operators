@@ -349,5 +349,6 @@ In each opertor folder, you can find an update script use to update the kustomiz
     oc get pods -n openshift-gitops-operator
   - Default ARGOCD
 
-    Oc get pods -n openshift-gitops
+    oc get pods -n openshift-gitops
+
 
