@@ -323,4 +323,27 @@ In each opertor folder, you can find an update script use to update the kustomiz
   - Instance
     oc get pods -n redhat-ods-applications
 
+### gitops operator
+- Installing gitops operator
+  - Update the air-gapped kustomize file
+    - Option 1 - Using update-gitops-default-values.sh
+      - Edit the script and update those values:
+        CHANNEL="latest"
+        CATALOG="cs-my-redhat-catalog"
+      - Run the script
+        ./update-gitops-default-values.sh
+
+    - Option 2 - Manually - Under pipeline folder
+      operator/overlays/airgapped/kustomization.yaml
+      - Update the channel
+      - Update the RH catalog name
+
+- Deploy the operator components
+  oc apply -k operator/overlays/airgapped/
+
+- Monitor
+  - Operator
+    oc get pods -n openshift-gitops-operator
+  - Default ARGOCD
+    Oc get pods -n openshift-gitops
 
