@@ -179,9 +179,11 @@ In each opertor folder, you can find an update script use to update the kustomiz
 
 - Deploy the operator components
   - Operator
+
     oc apply -k overlays/airgapped/
 
   - Monitor
+
     oc get all -n openshift-operators-redhat
 
 ### Jaeger operator
@@ -194,14 +196,17 @@ In each opertor folder, you can find an update script use to update the kustomiz
     ./update-jaeger-default-values.sh
 
 - Option 2 - Manually - Under jaeger folder
+
   overlays/airgapped/kustomization.yaml
     Update the channel 
     Update the RH catalog name
 
 - Deploy the operator components
+
   oc apply -k overlays/airgapped/
 
 - Monitor
+
   oc get all -n openshift-distributed-tracing
 
 ### Jaeger operator
@@ -218,8 +223,10 @@ In each opertor folder, you can find an update script use to update the kustomiz
     - Update the channel 
     - Update the RH catalog name
 - Deploy the operator components
+
   oc apply -k overlays/airgapped/
 - Monitor
+
   oc get all -n openshift-operators
 
 ### ServiceMesh operator
@@ -239,8 +246,10 @@ In each opertor folder, you can find an update script use to update the kustomiz
       - Update the RH catalog name
       - Update startingCSV
 - Deploy the operator components
+
   oc apply -k operator/overlays/airgapped/
 - Monitor
+
   oc get all -n openshift-operators
 
 ### Serverless operator
@@ -278,9 +287,11 @@ In each opertor folder, you can find an update script use to update the kustomiz
       - Update the RH catalog name
 
 - Deploy the operator components
+
   oc apply -k overlays/airgapped/
 
 - Monitor
+
   oc get all -n openshift-operators
 
 ### Openshift Data Science (rhods)
