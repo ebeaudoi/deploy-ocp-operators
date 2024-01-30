@@ -319,8 +319,10 @@ In each opertor folder, you can find an update script use to update the kustomiz
   oc apply -k instance/overlays/airgapped/
 - Monitor
   - Operator
+
     oc get pods -w -n redhat-ods-operator
   - Instance
+
     oc get pods -n redhat-ods-applications
 
 ### gitops operator
@@ -343,7 +345,9 @@ In each opertor folder, you can find an update script use to update the kustomiz
 
 - Monitor
   - Operator
+
     oc get pods -n openshift-gitops-operator
   - Default ARGOCD
+
     Oc get pods -n openshift-gitops
 
