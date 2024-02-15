@@ -1,0 +1,8 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: loki-bucket-test
+  namespace: ebdn
+spec:
+  generateBucketName: loki-bucket-test
+  storageClassName: openshift-storage.noobaa.io
