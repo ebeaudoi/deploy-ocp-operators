@@ -1,0 +1,36 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana-instance
+  namespace: elastic
+spec:
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch-instance
+  enterpriseSearchRef: {}
+  http:
+    service:
+      metadata: {}
+      spec: {}
+    tls:
+      certificate: {}
+  image: 'quay.devu.ca:8443/images/kibana:8.11.4-amd64'
+  monitoring:
+    logs: {}
+    metrics: {}
+  podTemplate:
+    metadata:
+      creationTimestamp: null
+      labels:
+        foo: bar
+    spec:
+      containers:
+        - name: kibana
+          resources:
+            limits:
+              cpu: '2'
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+  version: 8.11.4

@@ -1,0 +1,495 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    co.elastic.logs/module: elasticsearch
+    elasticsearch.k8s.elastic.co/config-hash: "931245607"
+    openshift.io/scc: restricted-v2
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+  creationTimestamp: "2024-04-16T19:01:18Z"
+  generateName: elasticsearch-sample-es-default-
+  labels:
+    common.k8s.elastic.co/type: elasticsearch
+    controller-revision-hash: elasticsearch-sample-es-default-58879f5ff7
+    elasticsearch.k8s.elastic.co/cluster-name: elasticsearch-sample
+    elasticsearch.k8s.elastic.co/http-scheme: https
+    elasticsearch.k8s.elastic.co/node-data: "true"
+    elasticsearch.k8s.elastic.co/node-data_cold: "false"
+    elasticsearch.k8s.elastic.co/node-data_content: "false"
+    elasticsearch.k8s.elastic.co/node-data_frozen: "false"
+    elasticsearch.k8s.elastic.co/node-data_hot: "false"
+    elasticsearch.k8s.elastic.co/node-data_warm: "false"
+    elasticsearch.k8s.elastic.co/node-ingest: "false"
+    elasticsearch.k8s.elastic.co/node-master: "true"
+    elasticsearch.k8s.elastic.co/node-ml: "false"
+    elasticsearch.k8s.elastic.co/node-remote_cluster_client: "false"
+    elasticsearch.k8s.elastic.co/node-transform: "false"
+    elasticsearch.k8s.elastic.co/node-voting_only: "false"
+    elasticsearch.k8s.elastic.co/statefulset-name: elasticsearch-sample-es-default
+    elasticsearch.k8s.elastic.co/version: 8.13.2
+    foo: bar
+    statefulset.kubernetes.io/pod-name: elasticsearch-sample-es-default-0
+  name: elasticsearch-sample-es-default-0
+  namespace: elastic
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: elasticsearch-sample-es-default
+    uid: 42aea76a-1bf5-41e8-bf80-10dc03d1008c
+  resourceVersion: "247824580"
+  uid: afdba7ba-5b62-4867-a9f5-da1ccf658f11
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              elasticsearch.k8s.elastic.co/cluster-name: elasticsearch-sample
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: PROBE_PASSWORD_PATH
+      value: /mnt/elastic-internal/pod-mounted-users/elastic-internal-probe
+    - name: PROBE_USERNAME
+      value: elastic-internal-probe
+    - name: READINESS_PROBE_PROTOCOL
+      value: https
+    - name: HEADLESS_SERVICE_NAME
+      value: elasticsearch-sample-es-default
+    - name: NSS_SDB_USE_CACHE
+      value: "no"
+    image: quay.devu.ca:8443/elasticstack/elasticsearch:8.13.2
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - bash
+          - -c
+          - /mnt/elastic-internal/scripts/pre-stop-hook-script.sh
+    name: elasticsearch
+    ports:
+    - containerPort: 9200
+      name: https
+      protocol: TCP
+    - containerPort: 9300
+      name: transport
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - bash
+        - -c
+        - /mnt/elastic-internal/scripts/readiness-probe-script.sh
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 4Gi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1001040000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mnt/elastic-internal/downward-api
+      name: downward-api
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/bin
+      name: elastic-internal-elasticsearch-bin-local
+    - mountPath: /mnt/elastic-internal/elasticsearch-config
+      name: elastic-internal-elasticsearch-config
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config
+      name: elastic-internal-elasticsearch-config-local
+    - mountPath: /usr/share/elasticsearch/plugins
+      name: elastic-internal-elasticsearch-plugins-local
+    - mountPath: /usr/share/elasticsearch/config/http-certs
+      name: elastic-internal-http-certificates
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/pod-mounted-users
+      name: elastic-internal-probe-user
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/transport-remote-certs/
+      name: elastic-internal-remote-certificate-authorities
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/scripts
+      name: elastic-internal-scripts
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/transport-certs
+      name: elastic-internal-transport-certificates
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/unicast-hosts
+      name: elastic-internal-unicast-hosts
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/xpack-file-realm
+      name: elastic-internal-xpack-file-realm
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-data
+    - mountPath: /usr/share/elasticsearch/logs
+      name: elasticsearch-logs
+    - mountPath: /usr/share/elasticsearch/config/operator
+      name: file-settings
+      readOnly: true
+    - mountPath: /tmp
+      name: tmp-volume
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: elasticsearch-sample-es-default-0
+  imagePullSecrets:
+  - name: default-dockercfg-5255q
+  initContainers:
+  - command:
+    - bash
+    - -c
+    - /mnt/elastic-internal/scripts/prepare-fs.sh
+    env:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: PROBE_PASSWORD_PATH
+      value: /mnt/elastic-internal/pod-mounted-users/elastic-internal-probe
+    - name: PROBE_USERNAME
+      value: elastic-internal-probe
+    - name: READINESS_PROBE_PROTOCOL
+      value: https
+    - name: HEADLESS_SERVICE_NAME
+      value: elasticsearch-sample-es-default
+    - name: NSS_SDB_USE_CACHE
+      value: "no"
+    image: quay.devu.ca:8443/elasticstack/elasticsearch:8.13.2
+    imagePullPolicy: IfNotPresent
+    name: elastic-internal-init-filesystem
+    resources:
+      limits:
+        cpu: 100m
+        memory: 50Mi
+      requests:
+        cpu: 100m
+        memory: 50Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1001040000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mnt/elastic-internal/downward-api
+      name: downward-api
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/elasticsearch-bin-local
+      name: elastic-internal-elasticsearch-bin-local
+    - mountPath: /mnt/elastic-internal/elasticsearch-config
+      name: elastic-internal-elasticsearch-config
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/elasticsearch-config-local
+      name: elastic-internal-elasticsearch-config-local
+    - mountPath: /mnt/elastic-internal/elasticsearch-plugins-local
+      name: elastic-internal-elasticsearch-plugins-local
+    - mountPath: /usr/share/elasticsearch/config/http-certs
+      name: elastic-internal-http-certificates
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/pod-mounted-users
+      name: elastic-internal-probe-user
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/transport-remote-certs/
+      name: elastic-internal-remote-certificate-authorities
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/scripts
+      name: elastic-internal-scripts
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/transport-certificates
+      name: elastic-internal-transport-certificates
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/unicast-hosts
+      name: elastic-internal-unicast-hosts
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/xpack-file-realm
+      name: elastic-internal-xpack-file-realm
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-data
+    - mountPath: /usr/share/elasticsearch/logs
+      name: elasticsearch-logs
+    - mountPath: /usr/share/elasticsearch/config/operator
+      name: file-settings
+      readOnly: true
+    - mountPath: /tmp
+      name: tmp-volume
+  - command:
+    - bash
+    - -c
+    - /mnt/elastic-internal/scripts/suspend.sh
+    env:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: PROBE_PASSWORD_PATH
+      value: /mnt/elastic-internal/pod-mounted-users/elastic-internal-probe
+    - name: PROBE_USERNAME
+      value: elastic-internal-probe
+    - name: READINESS_PROBE_PROTOCOL
+      value: https
+    - name: HEADLESS_SERVICE_NAME
+      value: elasticsearch-sample-es-default
+    - name: NSS_SDB_USE_CACHE
+      value: "no"
+    image: quay.devu.ca:8443/elasticstack/elasticsearch:8.13.2
+    imagePullPolicy: IfNotPresent
+    name: elastic-internal-suspend
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 4Gi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1001040000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /mnt/elastic-internal/downward-api
+      name: downward-api
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/bin
+      name: elastic-internal-elasticsearch-bin-local
+    - mountPath: /mnt/elastic-internal/elasticsearch-config
+      name: elastic-internal-elasticsearch-config
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config
+      name: elastic-internal-elasticsearch-config-local
+    - mountPath: /usr/share/elasticsearch/plugins
+      name: elastic-internal-elasticsearch-plugins-local
+    - mountPath: /usr/share/elasticsearch/config/http-certs
+      name: elastic-internal-http-certificates
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/pod-mounted-users
+      name: elastic-internal-probe-user
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/transport-remote-certs/
+      name: elastic-internal-remote-certificate-authorities
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/scripts
+      name: elastic-internal-scripts
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/transport-certs
+      name: elastic-internal-transport-certificates
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/unicast-hosts
+      name: elastic-internal-unicast-hosts
+      readOnly: true
+    - mountPath: /mnt/elastic-internal/xpack-file-realm
+      name: elastic-internal-xpack-file-realm
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-data
+    - mountPath: /usr/share/elasticsearch/logs
+      name: elasticsearch-logs
+    - mountPath: /usr/share/elasticsearch/config/operator
+      name: file-settings
+      readOnly: true
+    - mountPath: /tmp
+      name: tmp-volume
+  nodeSelector:
+    node-role.kubernetes.io/eck: ""
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1001040000
+    seLinuxOptions:
+      level: s0:c32,c24
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: elasticsearch-sample-es-default
+  terminationGracePeriodSeconds: 180
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/eck
+    operator: Exists
+  - effect: NoExecute
+    key: node-role.kubernetes.io/eck
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - name: elasticsearch-data
+    persistentVolumeClaim:
+      claimName: elasticsearch-data-elasticsearch-sample-es-default-0
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.labels
+        path: labels
+    name: downward-api
+  - emptyDir: {}
+    name: elastic-internal-elasticsearch-bin-local
+  - name: elastic-internal-elasticsearch-config
+    secret:
+      defaultMode: 420
+      optional: false
+      secretName: elasticsearch-sample-es-default-es-config
+  - emptyDir: {}
+    name: elastic-internal-elasticsearch-config-local
+  - emptyDir: {}
+    name: elastic-internal-elasticsearch-plugins-local
+  - name: elastic-internal-http-certificates
+    secret:
+      defaultMode: 420
+      optional: false
+      secretName: elasticsearch-sample-es-http-certs-internal
+  - name: elastic-internal-probe-user
+    secret:
+      defaultMode: 420
+      items:
+      - key: elastic-internal-probe
+        path: elastic-internal-probe
+      - key: elastic-internal-pre-stop
+        path: elastic-internal-pre-stop
+      optional: false
+      secretName: elasticsearch-sample-es-internal-users
+  - name: elastic-internal-remote-certificate-authorities
+    secret:
+      defaultMode: 420
+      optional: false
+      secretName: elasticsearch-sample-es-remote-ca
+  - configMap:
+      defaultMode: 493
+      name: elasticsearch-sample-es-scripts
+      optional: false
+    name: elastic-internal-scripts
+  - name: elastic-internal-transport-certificates
+    secret:
+      defaultMode: 420
+      optional: false
+      secretName: elasticsearch-sample-es-default-es-transport-certs
+  - configMap:
+      defaultMode: 420
+      name: elasticsearch-sample-es-unicast-hosts
+      optional: false
+    name: elastic-internal-unicast-hosts
+  - name: elastic-internal-xpack-file-realm
+    secret:
+      defaultMode: 420
+      optional: false
+      secretName: elasticsearch-sample-es-xpack-file-realm
+  - emptyDir: {}
+    name: elasticsearch-logs
+  - name: file-settings
+    secret:
+      defaultMode: 420
+      optional: false
+      secretName: elasticsearch-sample-es-file-settings
+  - emptyDir: {}
+    name: tmp-volume
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-04-16T19:01:18Z"
+    message: '0/19 nodes are available: pod has unbound immediate PersistentVolumeClaims.
+      preemption: 0/19 nodes are available: 19 Preemption is not helpful for scheduling..'
+    reason: Unschedulable
+    status: "False"
+    type: PodScheduled
+  phase: Pending
+  qosClass: Burstable

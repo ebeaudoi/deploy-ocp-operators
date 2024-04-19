@@ -1,0 +1,40 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch-instance
+  namespace: elastic
+spec:
+  nodeSets:
+    - config:
+        node.roles:
+          - master
+          - data
+        node.attr.attr_name: attr_value
+        node.store.allow_mmap: false
+      podTemplate:
+        metadata:
+          labels:
+            foo: bar
+        spec:
+          securityContext:
+            fsGroup: 1000
+            runAsUser: 1000
+            runAsGroup: 0
+          initContainers:
+          - name: elastic-internal-init-filesystem
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+          containers:
+            - name: elasticsearch
+              resources:
+                requests:
+                  memory: 4Gi
+                  cpu: 1
+                limits:
+                  memory: 4Gi
+                  cpu: 2
+      name: default
+      count: 1
+  version: 8.13.2
+  image: "quay.devu.ca:8443/images/elasticsearch:8.13.2"

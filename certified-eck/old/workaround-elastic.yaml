@@ -1,0 +1,24 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+  namespace: elastic
+spec:
+  version: 8.13.2
+  image: 'quay.devu.ca:8443/elasticstack/elasticsearch:8.13.2'
+  nodeSets:
+  - name: default
+    count: 1
+    config:
+      node.store.allow_mmap: false
+    podTemplate:
+      spec:
+        securityContext:
+          fsGroup: 1000
+          runAsUser: 1000
+          runAsGroup: 0
+        initContainers:
+        - name: elastic-internal-init-filesystem
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0

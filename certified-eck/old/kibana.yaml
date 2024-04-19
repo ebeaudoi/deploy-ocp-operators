@@ -1,0 +1,18 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana-eck
+spec:
+  version: 8.13.2
+  count: 1
+  elasticsearchRef:
+    name: "elasticsearch-eck"
+  podTemplate:
+    spec:
+      containers:
+      - name: kibana
+        image: quay.devu.ca:8443/images/kibana-ubi8:8.13.2
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: 1
