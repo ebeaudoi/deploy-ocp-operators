@@ -1,0 +1,11 @@
+IMPORTANT Fix: Verify the if the newly installed ODF we can see the " EXTERNAL-IP" is set to "pending"
+# oc get svc -A|grep -i noo
+~~~
+openshift-storage                                  noobaa-mgmt                                               LoadBalancer   172.30.225.54    <pending>                              80:31730/TCP,443:30935/TCP,8445:31107/TCP,8446:30794/TCP   24h
+~~~
+# oc edit noobaa noobaa -n openshift-storage
+~~~
+ dbType: postgres
+ disableLoadBalancerService: true         <--------------- Add this 
+ endpoints:
+~~~
