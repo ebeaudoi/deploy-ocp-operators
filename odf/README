@@ -1,3 +1,6 @@
+- Make sure the S3 storage is configured (NooBaa)
+
+
 IMPORTANT Fix: Verify the if the newly installed ODF we can see the " EXTERNAL-IP" is set to "pending"
 # oc get svc -A|grep -i noo
 ~~~
