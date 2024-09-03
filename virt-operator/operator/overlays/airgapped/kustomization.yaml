@@ -15,4 +15,5 @@ patches:
       value: stable
     - op: replace
       path: /spec/source
-      value: redhat-operators
+      value: cs-my-redhat-catalog-v416
+

@@ -4,8 +4,8 @@
 # IMPORTANT                    #
 # Update the 3 below variables #
 RHCAS_CHANNEL="stable"
-RHCAS_CATALOG="cs-my-redhat-catalog"
-RHACS_OSE_CLI="ebdnquay.ebdnlab.vmware.tamlab.rdu2.redhat.com:8443/redhat-v414/openshift4/ose-cli:e11912cb"
+RHCAS_CATALOG="redhat-operators"
+RHACS_OSE_CLI="registry.redhat.io/openshift4/ose-cli:latest"
 
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
