@@ -1,0 +1,17 @@
+NAME        DISPLAY NAME  DEFAULT CHANNEL
+submariner  Submariner    stable-0.18
+
+PACKAGE     CHANNEL      HEAD
+submariner  stable-0.15  submariner.v0.15.5
+submariner  stable-0.16  submariner.v0.16.7-0.1725373485.p
+submariner  stable-0.17  submariner.v0.17.2-0.1725901206.p
+submariner  stable-0.18  submariner.v0.18.0
+VERSIONS
+0.16.7
+0.16.7+0.1720576302.p
+0.16.7+0.1725373485.p
+0.16.0
+0.16.2
+0.16.3
+0.16.3+0.1708984487.p
+0.16.3+0.1718225392.p
