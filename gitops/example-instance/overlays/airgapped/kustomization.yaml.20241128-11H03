@@ -14,13 +14,12 @@ components:
   - ../../components/health-check-olm
   - ../../components/health-check-openshift-builds
 
-    #patches:
-    #- target:
-    #    kind: Group
-    #    name: .*
-    #  patch: |-
-    #    - op: replace
-    #      path: "/users/0"
-    #      name: name
-    #      value: admin
-    #
+patches:
+- target:
+    kind: Group
+    name: .*
+  patch: |-
+    - op: replace
+      path: /users
+      value: tester
+
