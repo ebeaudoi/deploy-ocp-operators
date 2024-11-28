@@ -12,7 +12,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
-      value: registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758
+      value: quay.devu.ca:8443/redhat-v414-01/openshift4/ose-cli:64a6e075
 # Change the Subscription details
 - target:
     kind: Subscription
@@ -20,8 +20,8 @@ patches:
   patch: |-
     - op: replace
       path: /spec/channel
-      value: stable-4.17
+      value: stable-4.14
     - op: replace
       path: /spec/source
-      value: redhat-operators
+      value: cs-my-redhat-catalog
 

@@ -1,11 +1,10 @@
 #!/bin/bash
-
 ################################
 # IMPORTANT                    #
 # Update the 3 below variables #
-CHANNEL="stable-4.14"
-CATALOG="cs-my-redhat-catalog"
-OSE_CLI_IMAGE="quay.devu.ca:8443/redhat-v414-01/openshift4/ose-cli:64a6e075"
+CHANNEL="stable-4.17"
+CATALOG="redhat-operators"
+OSE_CLI_IMAGE="registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
 CAPACITY="300Gi"
 DEFAULT_STORAGE="nutanix-volume"
 # Backup the files
