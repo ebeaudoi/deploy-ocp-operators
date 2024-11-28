@@ -17,5 +17,5 @@ patches:
        namespace: open-cluster-management
        name: multiclusterhub
        annotations:
-         installer.open-cluster-management.io/mce-subscription-spec: '{"source": "cs-my-redhat-catalog"}'
+         installer.open-cluster-management.io/mce-subscription-spec: '{"source": "ebdn-my-redhat-catalog"}'
          installer.open-cluster-management.io/mce-subscription-spec: '{"source": "ebdn-cs-my-redhat-catalog"}'

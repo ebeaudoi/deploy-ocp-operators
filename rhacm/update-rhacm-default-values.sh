@@ -3,9 +3,9 @@
 ################################
 # IMPORTANT                    #
 # Update the 3 below variables #
-RHCAM_CHANNEL="release-2.9"
-RHCAM_CATALOG="cs-my-redhat-catalog"
-RHACM_OSE_CLI="ebdnquay.ebdnlab.vmware.tamlab.rdu2.redhat.com:8443/redhat-v414/openshift4/ose-cli:e11912cb"
+RHCAM_CHANNEL="release-2.12"
+RHCAM_CATALOG="redhat-operators"
+RHACM_OSE_CLI="registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
 
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
