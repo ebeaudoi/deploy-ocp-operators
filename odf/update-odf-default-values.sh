@@ -6,7 +6,7 @@ CHANNEL="stable-4.17"
 CATALOG="redhat-operators"
 OSE_CLI_IMAGE="registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
 CAPACITY="300Gi"
-DEFAULT_STORAGE="nutanix-volume"
+DEFAULT_STORAGE="thin-csi"
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 cp noobaa/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
