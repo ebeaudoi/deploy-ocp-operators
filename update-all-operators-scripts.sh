@@ -35,6 +35,9 @@ RHODSCHANNEL="stable"
 ## RHACS ##
 RHCASCHANNEL="stable"
 
+## PIPELINE ##
+PIPELINECHANNEL="latest"
+
 ################################
 #    Backup all the files      #
 
@@ -45,7 +48,10 @@ RHCASCHANNEL="stable"
 #cp servicemesh/update-servicemesh-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp serverless/update-serverless-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp rhods/update-rhods-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-cp rhacs/update-rhacm-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+#cp rhacs/update-rhacm-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+cp pipelines-operator/update-pipeline-op-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+
+
 
 ################################
 #    Modify all the files      #
@@ -148,5 +154,14 @@ sed -i "s/^RHCAS_CATALOG.*$/RHCAS_CATALOG=\"$RHCATALOG\"/g" rhacs/update-rhacm-d
 echo "Updating: RHACS_OSE_CLI_IMAGE=$OSE_CLI_IMAGE"
 sed -i "s/^RHACS_OSE_CLI.*$/RHACS_OSE_CLI=\"$OSE_CLI_IMAGE\"/g" rhacs/update-rhacm-default-values.sh
 
+## PIPELINE ##
+echo "-- Modify pipeline Operator update script --"
+echo "File: pipelines-operator/update-pipeline-op-default-values.sh"
+#PIPELINECHANNEL
+echo "Updating: Pipeline CHANNEL=$PIPELINECHANNEL"
+sed -i "s/^CHANNEL.*$/CHANNEL=\"$PIPELINECHANNEL\"/g" pipelines-operator/update-pipeline-op-default-values.sh
+#PIPELINECATALOG
+echo "Updating: Pipeline CATALOG=$RHCATALOG"
+sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" pipelines-operator/update-pipeline-op-default-values.sh
 
 
