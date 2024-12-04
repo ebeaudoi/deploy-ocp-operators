@@ -3,8 +3,8 @@
 ################################
 # IMPORTANT                    #
 # Update the 2 below variables #
-RHODS_CHANNEL="stable"
-RH_CATALOG="cs-my-redhat-catalog"
+RHODS_CHANNEL="ebdn-stable"
+RH_CATALOG="ebdn-redhat-operators"
 
 # Backup the files
 cp operator/overlays/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}

@@ -4,7 +4,7 @@
 # IMPORTANT                    #
 # Update the 3 below variables #
 CHANNEL="latest"
-CATALOG="redhat-operators"
+CATALOG="ebdn-redhat-operators"
 #GITUSER="admin"
 # Backup the files
 cp operator/overlays/infra/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}

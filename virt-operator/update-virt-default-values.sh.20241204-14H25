@@ -2,22 +2,20 @@
 
 ################################
 # IMPORTANT                    #
-# Update the 2 below variables #
+# Update the 3 below variables #
 CHANNEL="stable"
-CATALOG="ebdn-redhat-operators"
+CATALOG="redhat-operators"
 # Backup the files
 cp operator/overlays/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 
-######################
-# Showing new values #
+# Showing new values
 echo "-----------------------------"
 echo "Channel = $CHANNEL"
 echo "Catalog = $CATALOG"
 echo "-----------------------------"
 
 #####################################
-# Update operator overlay yaml file #
-
+# Update operator overlays yaml file #
   # Update the subscription channel
 echo
 echo "-- Update operator channel-- "
@@ -28,5 +26,5 @@ sed -i "/path:\ \/spec\/channel/{ n; s/value: .*$/value: $CHANNEL/g }" operator/
 echo "-- Update operator catalog --"
 echo "File: operator/overlays/airgapped/kustomization.yaml"
 echo ""
-sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" operator/overlays/airgapped/kustomization.yaml
+sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" operator/overlays/airgapped/kustomization.yaml 
 

@@ -3,7 +3,7 @@
 # IMPORTANT                    #
 # Update the 3 below variables #
 CHANNEL="stable-4.17"
-CATALOG="redhat-operators"
+RHCATALOG="ebdn-redhat-operators"
 OSE_CLI_IMAGE="registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
 CAPACITY="300Gi"
 DEFAULT_STORAGE="thin-csi"
@@ -15,7 +15,7 @@ OSE_CLI=$( echo $OSE_CLI_IMAGE |sed 's/\//\\\//g')
 # Showing new values
 echo "-----------------------------"
 echo "Channel = $CHANNEL"
-echo "Catalog = $CATALOG"
+echo "Catalog = $RHCATALOG"
 echo "OSE CLI = $OSE_CLI"
 echo "CAPACITY = $CAPACITY"
 echo "D. Storage = $DEFAULT_STORAGE"
@@ -33,7 +33,7 @@ sed -i "/path:\ \/spec\/channel/{ n; s/value: .*$/value: $CHANNEL/g }" operator/
 echo "-- Update operator catalog --"
 echo "File: operator/overlay/airgapped/kustomization.yaml"
 echo ""
-sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $CATALOG/g }" operator/overlay/airgapped/kustomization.yaml
+sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: $RHCATALOG/g }" operator/overlay/airgapped/kustomization.yaml
   # Update image to enable console
 echo "-- Update ose cli image --"
 echo "File: operator/overlay/airgapped/kustomization.yaml"
