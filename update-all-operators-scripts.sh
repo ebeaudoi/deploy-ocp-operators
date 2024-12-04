@@ -6,7 +6,7 @@
 
 ## General variables ##
 RHCATALOG="ebdn-redhat-operators"
-OSE_CLI_IMAGE="registry\.redhat\.io\/openshift4\/ose-cli\@sha256\:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
+OSE_CLI_IMAGE="ebdn-registry\.redhat\.io\/openshift4\/ose-cli\@sha256\:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
 
 ## ODF operators ##
 ODFCHANNEL="stable-4.17"
@@ -32,6 +32,9 @@ SLESSCHANNEL="stable"
 ## RHODS ##
 RHODSCHANNEL="stable"
 
+## RHACS ##
+RHCASCHANNEL="stable"
+
 ################################
 #    Backup all the files      #
 
@@ -41,7 +44,9 @@ RHODSCHANNEL="stable"
 #cp virt-operator/update-virt-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp servicemesh/update-servicemesh-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp serverless/update-serverless-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-cp rhods/update-rhods-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+#cp rhods/update-rhods-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+cp rhacs/update-rhacm-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+
 ################################
 #    Modify all the files      #
 #ODF
@@ -129,6 +134,19 @@ sed -i "s/^RHODS_CHANNEL.*$/RHODS_CHANNEL=\"$RHODSCHANNEL\"/g" rhods/update-rhod
 #SLESS_CATALOG
 echo "Updating: RHODS CATALOG=$RHCATALOG"
 sed -i "s/^RH_CATALOG.*$/RH_CATALOG=\"$RHCATALOG\"/g" rhods/update-rhods-default-values.sh
+
+#RHACS
+echo "-- Modify RHACS Operator update script --"
+echo "File: rhacs/update-rhacm-default-values.sh"
+#RHCAS_CHANNEL
+echo "Updating: RHCAS_CHANNEL=$RHCASCHANNEL"
+sed -i "s/^RHCAS_CHANNEL.*$/RHCAS_CHANNEL=\"$RHCASCHANNEL\"/g" rhacs/update-rhacm-default-values.sh
+#RHCAS_CATALOG
+echo "Updating: RHCAS_CATALOG=$RHCATALOG"
+sed -i "s/^RHCAS_CATALOG.*$/RHCAS_CATALOG=\"$RHCATALOG\"/g" rhacs/update-rhacm-default-values.sh
+#RHACS_OSE_CLI
+echo "Updating: RHACS_OSE_CLI_IMAGE=$OSE_CLI_IMAGE"
+sed -i "s/^RHACS_OSE_CLI.*$/RHACS_OSE_CLI=\"$OSE_CLI_IMAGE\"/g" rhacs/update-rhacm-default-values.sh
 
 
 

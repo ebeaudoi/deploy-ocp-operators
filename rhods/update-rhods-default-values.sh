@@ -3,7 +3,7 @@
 ################################
 # IMPORTANT                    #
 # Update the 2 below variables #
-RHODS_CHANNEL="ebdn-stable"
+RHODS_CHANNEL="stable"
 RH_CATALOG="ebdn-redhat-operators"
 
 # Backup the files
