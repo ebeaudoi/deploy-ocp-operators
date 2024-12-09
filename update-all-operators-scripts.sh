@@ -38,6 +38,11 @@ RHCASCHANNEL="stable"
 ## PIPELINE ##
 PIPELINECHANNEL="latest"
 
+## LOGGING ##
+LOGCHANNEL="stable-5.8"
+LOKICHANNEL="stable-5.8"
+LOGSTORAGECLASS="storageclass"
+
 ################################
 #    Backup all the files      #
 
@@ -49,8 +54,8 @@ PIPELINECHANNEL="latest"
 #cp serverless/update-serverless-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp rhods/update-rhods-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp rhacs/update-rhacm-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-cp pipelines-operator/update-pipeline-op-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-
+#cp pipelines-operator/update-pipeline-op-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+#cp logging/update-logging-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 
 
 ################################
@@ -163,5 +168,22 @@ sed -i "s/^CHANNEL.*$/CHANNEL=\"$PIPELINECHANNEL\"/g" pipelines-operator/update-
 #PIPELINECATALOG
 echo "Updating: Pipeline CATALOG=$RHCATALOG"
 sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" pipelines-operator/update-pipeline-op-default-values.sh
+
+## LOGGING ##
+echo "-- Modify Logging Operator update script --"
+echo "File: logging/update-logging-default-values.sh"
+#LOGGING CHANNEL
+echo "Updating: Logging CHANNEL=$LOGCHANNEL"
+sed -i "s/^LOG_CHANNEL.*$/LOG_CHANNEL=\"$LOGCHANNEL\"/g" logging/update-logging-default-values.sh
+#LOGGING CATALOG
+echo "Updating: Logging CATALOG=$RHCATALOG"
+sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" logging/update-logging-default-values.sh
+#LOGGING LOKI CHANNEL
+echo "Updating: Logging LOKI CHANNEL=$LOKICHANNEL"
+sed -i "s/^LOKI_CHANNEL.*$/LOKI_CHANNEL=\"$LOKICHANNEL\"/g" logging/update-logging-default-values.sh
+#LOGGING STORAGE CLASS
+echo "Updating: Logging STORAGECLASS=$LOGSTORAGECLASS"
+sed -i "s/^STORAGECLASS.*$/STORAGECLASS=\"$LOGSTORAGECLASS\"/g" logging/update-logging-default-values.sh
+
 
 

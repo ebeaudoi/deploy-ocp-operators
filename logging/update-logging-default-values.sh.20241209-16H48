@@ -7,7 +7,7 @@
 LOG_CHANNEL="ebdn-stable-5.8"
 LOKI_CHANNEL="ebdn-stable-5.8"
 CATALOG="ebdn-redhat-operators"
-STORAGECLASS="ebdn-storageclass"
+STORAGECLASS="storageclass"
 
 ####################
 # Backup the files #
