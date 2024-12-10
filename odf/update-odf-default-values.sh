@@ -4,7 +4,7 @@
 # Update the 3 below variables #
 CHANNEL="stable-4.17"
 RHCATALOG="ebdn-redhat-operators"
-OSE_CLI_IMAGE="ebdn-registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
+OSE_CLI_IMAGE="registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
 CAPACITY="300Gi"
 DEFAULT_STORAGE="thin-csi"
 # Backup the files

@@ -4,10 +4,10 @@
 # IMPORTANT                    #
 # Update the 3 below variables #
 #                              #
-LOG_CHANNEL="ebdn-stable-5.8"
-LOKI_CHANNEL="ebdn-stable-5.8"
+LOG_CHANNEL="stable-5.8"
+LOKI_CHANNEL="stable-5.8"
 CATALOG="ebdn-redhat-operators"
-STORAGECLASS="ebdn-storageclass"
+STORAGECLASS="storageclass"
 
 ####################
 # Backup the files #

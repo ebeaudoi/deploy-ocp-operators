@@ -3,11 +3,11 @@
 ################################
 # IMPORTANT                    #
 # Update the 3 below variables #
-NUTANIX_CHANNEL="stable"
-CERTCATALOG="my-redhat-v413-catalog"
-PRISM_ISCSI_IP="10.10.10.10"
-PRISM_STORAGE_NAME="os-storage"
-PRISM_EL_LOGIN="10.10.17.90:9440:username:password"
+NUTANIX_CHANNEL="ebdn-stable"
+CERTCATALOG="ebdn-my-redhat-v413-catalog"
+PRISM_ISCSI_IP="ebdn-10.10.10.10"
+PRISM_STORAGE_NAME="ebdn-os-storage"
+PRISM_EL_LOGIN="ebdn-10.10.17.90:9440:username:password"
 
 # Backup the files
 cp operator/overlay/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}

@@ -6,7 +6,8 @@
 
 ## General variables ##
 RHCATALOG="ebdn-redhat-operators"
-OSE_CLI_IMAGE="ebdn-registry\.redhat\.io\/openshift4\/ose-cli\@sha256\:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
+OSE_CLI_IMAGE="registry\.redhat\.io\/openshift4\/ose-cli\@sha256\:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
+CERTCATALOG="my-certified-v413-catalog"
 
 ## ODF operators ##
 ODFCHANNEL="stable-4.17"
@@ -43,6 +44,14 @@ LOGCHANNEL="stable-5.8"
 LOKICHANNEL="stable-5.8"
 LOGSTORAGECLASS="storageclass"
 
+## NUTANIX ##
+NUTANIXCHANNEL="stable"
+CERTCATALOG="my-redhat-v413-catalog"
+PRISMISCSIIP="10.10.10.10"
+PRISMSTORAGENAME="os-storage"
+PRISMELLOGIN="10.10.17.90:9440:username:password"
+
+
 ################################
 #    Backup all the files      #
 
@@ -56,7 +65,7 @@ LOGSTORAGECLASS="storageclass"
 #cp rhacs/update-rhacm-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp pipelines-operator/update-pipeline-op-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp logging/update-logging-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-
+cp nutanix/update-nutanix-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 
 ################################
 #    Modify all the files      #
@@ -185,5 +194,22 @@ sed -i "s/^LOKI_CHANNEL.*$/LOKI_CHANNEL=\"$LOKICHANNEL\"/g" logging/update-loggi
 echo "Updating: Logging STORAGECLASS=$LOGSTORAGECLASS"
 sed -i "s/^STORAGECLASS.*$/STORAGECLASS=\"$LOGSTORAGECLASS\"/g" logging/update-logging-default-values.sh
 
-
+# NUTANIX 
+echo "-- Modify Nutanix Operator update script --"
+echo "File: nutanix/update-nutanix-default-values.sh"
+#NUTANIX CHANNEL
+echo "Updating: Nutanix CHANNEL=$LOGCHANNEL"
+sed -i "s/^NUTANIX_CHANNEL.*$/NUTANIX_CHANNEL=\"$NUTANIXCHANNEL\"/g" nutanix/update-nutanix-default-values.sh
+#NUTANIX CATALOG
+echo "Updating: Nutanix CATALOG=$RHCATALOG"
+sed -i "s/^CERTCATALOG.*$/CERTCATALOG=\"$CERTCATALOG\"/g" nutanix/update-nutanix-default-values.sh
+#NUTANIX PRISM_ISCSI_IP
+echo "Updating: Nutanix PRISM_ISCSI_IP=$PRISMISCSIIP"
+sed -i "s/^PRISM_ISCSI_IP.*$/PRISM_ISCSI_IP=\"$PRISMISCSIIP\"/g" nutanix/update-nutanix-default-values.sh
+#NUTANIX STORAGE CLASS
+echo "Updating: Nutanix PRISM_STORAGE_NAME=$PRISMSTORAGENAME"
+sed -i "s/^PRISM_STORAGE_NAME.*$/PRISM_STORAGE_NAME=\"$PRISMSTORAGENAME\"/g" nutanix/update-nutanix-default-values.sh
+#NUTANIX PRISM_EL_LOGIN
+echo "Updating: Nutanix PRISM_EL_LOGIN=$PRISMELLOGIN"
+sed -i "s/^PRISM_EL_LOGIN.*$/PRISM_EL_LOGIN=\"$PRISMELLOGIN\"/g" nutanix/update-nutanix-default-values.sh
 
