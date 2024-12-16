@@ -51,6 +51,9 @@ PRISMISCSIIP="10.10.10.10"
 PRISMSTORAGENAME="os-storage"
 PRISMELLOGIN="10.10.17.90:9440:username:password"
 
+## KIALI ##
+KIALICHANNEL="ebdn-stable"
+
 
 ################################
 #    Backup all the files      #
@@ -65,8 +68,8 @@ PRISMELLOGIN="10.10.17.90:9440:username:password"
 #cp rhacs/update-rhacm-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp pipelines-operator/update-pipeline-op-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp logging/update-logging-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-cp nutanix/update-nutanix-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-
+#cp nutanix/update-nutanix-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+cp kiali/update-kiali-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 ################################
 #    Modify all the files      #
 #ODF
@@ -213,3 +216,12 @@ sed -i "s/^PRISM_STORAGE_NAME.*$/PRISM_STORAGE_NAME=\"$PRISMSTORAGENAME\"/g" nut
 echo "Updating: Nutanix PRISM_EL_LOGIN=$PRISMELLOGIN"
 sed -i "s/^PRISM_EL_LOGIN.*$/PRISM_EL_LOGIN=\"$PRISMELLOGIN\"/g" nutanix/update-nutanix-default-values.sh
 
+## KIALI ##
+echo "-- Modify Kiali Operator update script --"
+echo "File: kiali/update-kiali-default-values.sh"
+#KIALI_CHANNEL
+echo "Updating: KIALI CHANNEL=$KIALICHANNEL"
+sed -i "s/^CHANNEL.*$/CHANNEL=\"$KIALICHANNEL\"/g" kiali/update-kiali-default-values.sh
+#KIALI_CATALOG
+echo "Updating: KIALI CATALOG=$RHCATALOG"
+sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" kiali/update-kiali-default-values.sh
