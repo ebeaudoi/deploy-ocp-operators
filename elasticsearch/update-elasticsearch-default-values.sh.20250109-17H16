@@ -3,7 +3,7 @@
 ################################
 # IMPORTANT                    #
 # Update the 2 below variables #
-CHANNEL="ebdn-stable-5.8"
+CHANNEL="stable-5.8"
 CATALOG="ebdn-redhat-operators"
 # Backup the files
 cp overlays/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}

@@ -52,8 +52,13 @@ PRISMSTORAGENAME="os-storage"
 PRISMELLOGIN="10.10.17.90:9440:username:password"
 
 ## KIALI ##
-KIALICHANNEL="ebdn-stable"
+KIALICHANNEL="stable"
 
+## JAEGER ##
+JAEGERCHANNEL="stable"
+
+## ELASTICSEARCH ##
+ELASTICSEARCHCHANNEL="stable-5.8"
 
 ################################
 #    Backup all the files      #
@@ -69,7 +74,9 @@ KIALICHANNEL="ebdn-stable"
 #cp pipelines-operator/update-pipeline-op-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp logging/update-logging-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 #cp nutanix/update-nutanix-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
-cp kiali/update-kiali-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+#cp kiali/update-kiali-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+#cp jaeger/update-jaeger-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
+cp elasticsearch/update-elasticsearch-default-values.sh{,.$(date +%Y%m%d-%HH%M)}
 ################################
 #    Modify all the files      #
 #ODF
@@ -225,3 +232,28 @@ sed -i "s/^CHANNEL.*$/CHANNEL=\"$KIALICHANNEL\"/g" kiali/update-kiali-default-va
 #KIALI_CATALOG
 echo "Updating: KIALI CATALOG=$RHCATALOG"
 sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" kiali/update-kiali-default-values.sh
+
+## JAEGER ##
+echo "-- Modify Jaeger Operator update script --"
+echo "File: jaeger/update-jaeger-default-values.sh"
+#JAEGER_CHANNEL
+echo "Updating: JAEGER CHANNEL=$JAEGERCHANNEL"
+sed -i "s/^CHANNEL.*$/CHANNEL=\"$JAEGERCHANNEL\"/g" jaeger/update-jaeger-default-values.sh
+#JAEGER_CATALOG
+echo "Updating: JAEGER CATALOG=$RHCATALOG"
+sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" jaeger/update-jaeger-default-values.sh
+
+
+## ELASTICSEARCH ##
+echo "-- Modify ELASTICSEARCH Operator update script --"
+echo "File: elasticsearch/update-elasticsearch-default-values.sh"
+#ELASTICSEARCH_CHANNEL
+echo "Updating: ELASTICSEARCH CHANNEL=$ELASTICSEARCHCHANNEL"
+sed -i "s/^CHANNEL.*$/CHANNEL=\"$ELASTICSEARCHCHANNEL\"/g" elasticsearch/update-elasticsearch-default-values.sh
+#ELASTICSEARCH_CATALOG
+echo "Updating: ELASTICSEARCH CATALOG=$RHCATALOG"
+sed -i "s/^CATALOG.*$/CATALOG=\"$RHCATALOG\"/g" elasticsearch/update-elasticsearch-default-values.sh
+
+
+
+
