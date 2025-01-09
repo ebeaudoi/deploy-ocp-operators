@@ -4,7 +4,7 @@
 # IMPORTANT                    #
 # Update the 2 below variables #
 CHANNEL="stable"
-CATALOG="cs-my-redhat-catalog"
+CATALOG="ebdn-redhat-operators"
 # Backup the files
 cp overlays/airgapped/kustomization.yaml{,.$(date +%Y%m%d-%HH%M)}
 
