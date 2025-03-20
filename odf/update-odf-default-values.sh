@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################
 # IMPORTANT                    #
-# Update the 3 below variables #
+# Update the 5 below variables #
 CHANNEL="stable-4.17"
 RHCATALOG="ebdn-redhat-operators"
 OSE_CLI_IMAGE="registry.redhat.io/openshift4/ose-cli@sha256:3b288bdf503733042786c07ab23ba344c8ad98a38717c192584d0e1926ae9758"
