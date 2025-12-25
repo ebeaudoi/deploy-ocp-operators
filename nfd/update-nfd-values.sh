@@ -1,6 +1,6 @@
 #!/bin/bash
 ####################################################
-# Local Storage Operator Update Script             #
+# NFD Operator Update Script                       #
 # Updates kustomization.yaml files with new values #
 ####################################################
 
@@ -8,8 +8,8 @@
 # IMPORTANT                    #
 # Update the variables below   #
 ################################
-LOCAL_STORAGE_SUBSCRIPTION_CHANNEL="stable"
-LOCAL_STORAGE_CATALOG_SOURCE="ebdn-redhat-operators"
+NFD_SUBSCRIPTION_CHANNEL="stable"
+NFD_CATALOG_SOURCE="ebdn-redhat-operators"
 
 ################################
 # Backup the files             #
@@ -21,30 +21,30 @@ cp operator/overlays/airgapped/kustomization.yaml{,.${BACKUP_SUFFIX}}
 # Display configuration         #
 ################################
 echo "=========================================="
-echo "Local Storage Operator Configuration"
+echo "NFD Operator Configuration"
 echo "=========================================="
-echo "  Subscription Channel: ${LOCAL_STORAGE_SUBSCRIPTION_CHANNEL}"
-echo "  Catalog Source:       ${LOCAL_STORAGE_CATALOG_SOURCE}"
+echo "  Subscription Channel: ${NFD_SUBSCRIPTION_CHANNEL}"
+echo "  Catalog Source:       ${NFD_CATALOG_SOURCE}"
 echo "=========================================="
 echo ""
 
 ################################
 # Update Operator Overlay       #
 ################################
-echo "[Local Storage Operator] Updating operator overlay..."
+echo "[NFD Operator] Updating operator overlay..."
 echo "  File: operator/overlays/airgapped/kustomization.yaml"
 
 # Update subscription channel
-sed -i "/path:\ \/spec\/channel/{ n; s/value: .*$/value: ${LOCAL_STORAGE_SUBSCRIPTION_CHANNEL}/g }" operator/overlays/airgapped/kustomization.yaml && \
-    echo "    ✓ Updated subscription channel: ${LOCAL_STORAGE_SUBSCRIPTION_CHANNEL}" || \
+sed -i "/path:\ \/spec\/channel/{ n; s/value: .*$/value: ${NFD_SUBSCRIPTION_CHANNEL}/g }" operator/overlays/airgapped/kustomization.yaml && \
+    echo "    ✓ Updated subscription channel: ${NFD_SUBSCRIPTION_CHANNEL}" || \
     echo "    ✗ Failed to update subscription channel"
 
 # Update subscription catalog source
-sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: ${LOCAL_STORAGE_CATALOG_SOURCE}/g }" operator/overlays/airgapped/kustomization.yaml && \
-    echo "    ✓ Updated catalog source: ${LOCAL_STORAGE_CATALOG_SOURCE}" || \
+sed -i "/path:\ \/spec\/source/{ n; s/value: .*$/value: ${NFD_CATALOG_SOURCE}/g }" operator/overlays/airgapped/kustomization.yaml && \
+    echo "    ✓ Updated catalog source: ${NFD_CATALOG_SOURCE}" || \
     echo "    ✗ Failed to update catalog source"
 
 echo ""
 echo "=========================================="
-echo "Local Storage Operator update completed successfully"
+echo "NFD Operator update completed successfully"
 echo "=========================================="
